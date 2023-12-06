@@ -16,7 +16,7 @@ def legal_move(field):
     combo_row = None
     row_combo = False
 
-    # Check if there are three diamonds of the same color in a row.
+    # Check if there are three diamonds of the same color in a row from 0-3.
     for row in field:
         for cell in row:
             if cell == row[0] and cell == row[1] and cell == row[2]:
@@ -33,12 +33,26 @@ def legal_move(field):
                 for i in range (3):
                     special_chk_list_row.append([field_index_combo_row, i])
 
-                print(special_chk_list_row)    
+    # Check if there are three diamonds of the same color in a row but from 1-4.
+        for cell in row:
+            if cell == row[1] and cell == row[2] and cell == row[3]:
+                print("\nThe move is legal.")
+                check_list_row.append(cell)
+                combo_row = row
+                row_combo = True
 
+                # Get the the field index of the diamonds that create a combo of 3 in a row.
+                field_index_combo_row = field.index(combo_row)
+                special_chk_list_row = []
+
+                # Add the indices to a list.
+                for i in range (3):
+                    special_chk_list_row.append([field_index_combo_row, i])
 
     check_list_column = []
     column_combo = False
 
+    # Check if there are three diamonds of the same color in a column.
     for i in range(4):
         for row in field:
             for cell in row[i:(i+1)]:
@@ -50,7 +64,6 @@ def legal_move(field):
                     print("\nThe move is legal.")
                     column_combo = True
                     remove_chk = False
-                    #quit()
                 else:
                     check_list_column.remove(check_list_column[0])
                     remove_chk = True
@@ -141,16 +154,16 @@ def candy_crush(field):
     field[y_end - 1][x_end - 1] = first_diamond
     field[y_start - 1][x_start - 1] = second_diamond
 
-    legal_move(field)
-
     # Printing game_field after move
     for row in field:
         print(row)
     print("\n")
 
+    legal_move(field)
+
 
 game_field = [[2, 1, 4, 3],
-              [4, 4, 4, 5], 
+              [1, 4, 4, 5], 
               [2, 5, 4, 4],
               [6, 7, 6, 1]]
 

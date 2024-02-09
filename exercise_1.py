@@ -101,6 +101,3 @@ game_field = [[1, 2, 3],
 
 
 candy_crush(game_field)
-
-
-print("hello")
